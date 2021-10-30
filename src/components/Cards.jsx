@@ -39,7 +39,6 @@ export default function Cards(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions sx={{ display: 'flex', justifyContent: 'center' }} />
     </Card>
   );
 }
