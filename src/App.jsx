@@ -13,6 +13,8 @@ import PcFilter from './components/Filtres/PcFilter';
 import PsFilter from './components/Filtres/PsFilter';
 import XboxFilter from './components/Filtres/XboxFilter';
 import AllFilter from './components/Filtres/AllFilter';
+import NoteFilter from './components/Filtres/NoteFilter';
+import DateFilter from './components/Filtres/DateFilter';
 
 let page = 1;
 
@@ -90,6 +92,8 @@ export default function Main() {
         <LinuxFilter setApiFilter={setApiFilter} />
         <PcFilter setApiFilter={setApiFilter} />
         <PsFilter setApiFilter={setApiFilter} />
+        <NoteFilter apiFilter={apiFilter} setApiFilter={setApiFilter} />
+        <DateFilter apiFilter={apiFilter} setApiFilter={setApiFilter} />
         {/* cards */}
         <ul className="grid-parent">
           {/* on va lire le tableau de la réponse parametre par parametre */}
