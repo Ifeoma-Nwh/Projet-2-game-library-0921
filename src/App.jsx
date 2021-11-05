@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-else-return */
 /* eslint-disable no-shadow */
 /* eslint-disable react/button-has-type */
-import './App.css';
+/* eslint-disable no-else-return */
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import Cards from './components/Cards';
@@ -17,8 +15,8 @@ import XboxFilter from './components/Filtres/XboxFilter';
 import AllFilter from './components/Filtres/AllFilter';
 
 let page = 1;
-/* filtrer par platerforme parent : &parent_platforms=4 */
-function App() {
+
+export default function Main() {
   const [pages, setPage] = React.useState(1);
   const [pageChanges, setPageChanges] = React.useState(true); // true = suivant et false = precedent
   const [apiPages, setApiPages] = React.useState(
@@ -30,17 +28,13 @@ function App() {
   const [error, setError] = React.useState(null);
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [items, setItems] = React.useState([]);
-  React.useEffect(() => {
-    console.log(pages);
-    console.log(pageChanges);
-    // setApiFilter(`https://rawg.io/api/games?key=a9d50f2881ee441fbaf3e0368a2f3589`);
+  useEffect(() => {
     if (pageChanges) {
       axios
-        .get(apiPages) // requête
+        .get(apiFilter) // requête
         .then(
           (res) => {
             // permet de transmettre à items la réponse de l'API grâce à "setState"
-            console.log(res.data);
             setIsLoaded(true);
             setItems(res.data.results);
             setApiPages(res.data);
@@ -55,7 +49,7 @@ function App() {
         );
     } else {
       axios
-        .get(apiPages) // requête
+        .get(apiFilter) // requête de la page
         .then(
           (res) => {
             // permet de transmettre à items la réponse de l'API grâce à "setState"
@@ -73,30 +67,7 @@ function App() {
           }
         );
     }
-  }, [pages]);
-
-  useEffect(() => {
-    console.log(apiFilter);
-    setApiPages(apiFilter);
-    axios
-      .get(apiFilter) // requête
-      .then(
-        (res) => {
-          // permet de transmettre à items la réponse de l'API grâce à "setState"
-          console.log(res.data);
-          setIsLoaded(true);
-          setItems(res.data.results);
-          setApiPages(res.data);
-        },
-        // Remarque : il est important de traiter les erreurs ici
-        // au lieu d'utiliser un bloc catch(), pour ne pas passer à la trappe
-        // des exceptions provenant de réels bugs du composant.
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
-  }, [apiFilter]);
+  }, [pages, apiFilter]);
 
   if (error) {
     // si erreur on affiche laquel
@@ -135,6 +106,7 @@ function App() {
                 released={item.released}
                 genres={item.genres}
                 platformes={item.parent_platforms}
+                id={item.id}
               />
             </li>
           ))}
@@ -142,7 +114,7 @@ function App() {
             <button
               onClick={() => {
                 setPageChanges(true);
-                setApiPages(apiPages.next);
+                setApiFilter(apiPages.next);
                 page += 1;
                 setPage(page);
               }}
@@ -153,7 +125,7 @@ function App() {
             <button
               onClick={() => {
                 setPageChanges(false);
-                setApiPages(apiPages.previous);
+                setApiFilter(apiPages.previous);
                 page -= 1;
                 setPage(page);
               }}
@@ -167,5 +139,3 @@ function App() {
     );
   }
 }
-
-export default App;
