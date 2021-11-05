@@ -13,8 +13,8 @@ import PcFilter from './components/Filtres/PcFilter';
 import PsFilter from './components/Filtres/PsFilter';
 import XboxFilter from './components/Filtres/XboxFilter';
 import AllFilter from './components/Filtres/AllFilter';
-import NoteFilter from './components/Filtres/NoteFilter';
-import DateFilter from './components/Filtres/DateFilter';
+import NoteFilter from './components/Filtres/RatingFilter';
+import DateFilter from './components/Filtres/ReleasedDateFilter';
 
 let page = 1;
 
