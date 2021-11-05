@@ -53,7 +53,6 @@ export default function Main() {
         .then(
           (res) => {
             // permet de transmettre à items la réponse de l'API grâce à "setState"
-            console.log(res.data);
             setIsLoaded(true);
             setItems(res.data.results);
             setApiPages(res.data);
