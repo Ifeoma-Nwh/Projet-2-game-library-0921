@@ -19,6 +19,8 @@ import PcFilter from './Filtres/PcFilter';
 import PsFilter from './Filtres/PsFilter';
 import XboxFilter from './Filtres/XboxFilter';
 import AllFilter from './Filtres/AllFilter';
+import RatingFilter from './Filtres/RatingFilter';
+import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
 
 let page = 1; // numéro de page
 
@@ -99,6 +101,16 @@ export default function Main() {
         <LinuxFilter setApiFilter={setApiFilter} setAff={setAff} />
         <PcFilter setApiFilter={setApiFilter} setAff={setAff} />
         <PsFilter setApiFilter={setApiFilter} setAff={setAff} />
+        <RatingFilter
+          apiFilter={apiFilter}
+          setApiFilter={setApiFilter}
+          setAff={setAff}
+        />
+        <ReleasedDateFilter
+          apiFilter={apiFilter}
+          setApiFilter={setApiFilter}
+          setAff={setAff}
+        />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
           la page de tallCards si on la quitte on le redirige vers home "/" */}
         {/* rajout dans la route tall-card de l'id du jeux */}
