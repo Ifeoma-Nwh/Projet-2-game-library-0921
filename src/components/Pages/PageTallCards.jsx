@@ -78,8 +78,6 @@ export default function PageTallCards(props) {
         }
       );
   }, [id]);
-  console.log(items);
-  console.log(itemsImages);
   useEffect(() => {
     axios
       .get(apiGames) // requête
@@ -103,7 +101,6 @@ export default function PageTallCards(props) {
         }
       );
   }, [id]);
-  console.log(items);
 
   function srcset(image, size, rows = 1, cols = 1) {
     return {

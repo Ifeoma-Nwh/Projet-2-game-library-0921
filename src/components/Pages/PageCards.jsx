@@ -4,7 +4,6 @@ import Cards from '../Cards';
 
 export default function PageCards(props) {
   const { setAff, setID, items } = props;
-  console.log(items);
   return (
     <div>
       {/* cards */}
