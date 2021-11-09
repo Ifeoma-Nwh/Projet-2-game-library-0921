@@ -10,6 +10,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import NavBar from './NavBar';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,7 +57,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar(props) {
   const { setApiFilter } = props;
   const [searchValue, setSearchValue] = useState('');
-  console.log(searchValue);
 
   const handleOnchange = (e) => {
     setSearchValue(e.target.value);
@@ -81,6 +81,7 @@ export default function SearchAppBar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+          <NavBar />
           <Typography
             variant="h6"
             noWrap
