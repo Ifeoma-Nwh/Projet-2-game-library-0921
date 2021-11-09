@@ -5,6 +5,7 @@ import './App.css';
 import React from 'react';
 import axios from 'axios';
 import Cards from './components/Cards';
+import NavBar from './components/NavBar';
 
 let page = 1;
 /* filtrer par platerforme parent : &parent_platforms=4 */
@@ -72,49 +73,54 @@ function App() {
     );
   } else {
     return (
-      <ul className="grid-parent">
-        {/* on va lire le tableau de la réponse parametre par parametre */}
-        {items.map((item) => (
-          <li
-            key={item.id}
-            style={{ listStyle: 'none' }}
-            className="grid-enfant"
-          >
-            {/* A chaque lecture de parametre on crée une nouvelle carte en fonction du parametre(jeux) */}
-            <Cards
-              image={item.background_image}
-              name={item.name}
-              released={item.released}
-              genres={item.genres}
-              platformes={item.parent_platforms}
-            />
-          </li>
-        ))}
-        <a href="/#">
-          <button
-            onClick={() => {
-              setPageChanges(true);
-              setApiFilter(apiFilter.next);
-              page += 1;
-              setPage(page);
-            }}
-          >
-            {' '}
-            Page suivante{' '}
-          </button>
-          <button
-            onClick={() => {
-              setPageChanges(false);
-              setApiFilter(apiFilter.previous);
-              page -= 1;
-              setPage(page);
-            }}
-          >
-            {' '}
-            Page precedente{' '}
-          </button>
-        </a>
-      </ul>
+      <div>
+        {/* Navbar */}
+        <NavBar />
+        {/* Cards */}
+        <ul className="grid-parent">
+          {/* on va lire le tableau de la réponse parametre par parametre */}
+          {items.map((item) => (
+            <li
+              key={item.id}
+              style={{ listStyle: 'none' }}
+              className="grid-enfant"
+            >
+              {/* A chaque lecture de parametre on crée une nouvelle carte en fonction du parametre(jeux) */}
+              <Cards
+                image={item.background_image}
+                name={item.name}
+                released={item.released}
+                genres={item.genres}
+                platformes={item.parent_platforms}
+              />
+            </li>
+          ))}
+          <a href="/#">
+            <button
+              onClick={() => {
+                setPageChanges(true);
+                setApiFilter(apiFilter.next);
+                page += 1;
+                setPage(page);
+              }}
+            >
+              {' '}
+              Page suivante{' '}
+            </button>
+            <button
+              onClick={() => {
+                setPageChanges(false);
+                setApiFilter(apiFilter.previous);
+                page -= 1;
+                setPage(page);
+              }}
+            >
+              {' '}
+              Page precedente{' '}
+            </button>
+          </a>
+        </ul>
+      </div>
     );
   }
 }
