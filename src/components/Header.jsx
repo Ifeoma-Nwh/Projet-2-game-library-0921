@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import NavBar from './NavBar';
 
 const Search = styled('div')(({ theme }) => ({
@@ -63,16 +61,6 @@ export default function SearchAppBar(props) {
   };
 
   useEffect(() => {
-    /* axios
-      .get(
-        `https://api.rawg.io/api/games?key=d3437269835545eaa073f2e0d0032525&search=${searchValue}`
-      )
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      }); */
     setApiFilter(
       `https://api.rawg.io/api/games?key=d3437269835545eaa073f2e0d0032525&search=${searchValue}`
     );
@@ -106,8 +94,6 @@ export default function SearchAppBar(props) {
     </Box>
   );
 }
-
-/* 1. recuperation de la saisie de la barre de recherche
-
-2. requete API avec axios sur
-https://api.rawg.io/api/games?search={variable recupere en 1} */
+SearchAppBar.propTypes = {
+  setApiFilter: PropTypes.node.isRequired,
+};
