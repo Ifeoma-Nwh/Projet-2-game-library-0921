@@ -6,28 +6,42 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import Rating from '@mui/material/Rating';
 
 export default function Cards(props) {
-  const { image, name, released, genres, platformes, id, setID, setAff, aff } =
-    props;
+  const {
+    image,
+    name,
+    released,
+    genres,
+    platformes,
+    id,
+    setID,
+    setAff,
+    aff,
+    rating,
+  } = props;
   let strGenres = ''; // permettra de stocker les noms des genres
-  genres.forEach((genre) => {
-    if (genre.name) {
-      strGenres += `${genre.name}, `;
-    }
-    return strGenres;
-  }); // Stock dans la variable "strGenres" les genres
-  const str = strGenres.substring(0, strGenres.length - 1);
+  if (genres) {
+    genres.forEach((genre) => {
+      if (genre.name) {
+        strGenres += `${genre.name}, `;
+      }
+      return strGenres;
+    }); // Stock dans la variable "strGenres" les genres
+  }
+  strGenres = strGenres.substring(0, strGenres.length - 2);
   let setPlatformes = ''; // permettra de stocker les noms des platefromes
-  // eslint-disable-next-line prettier/prettier
+  // si le jeux contient des platformes on fait
   if (platformes) {
-    Array.from(platformes).forEach((platforme) => {
+    platformes.forEach((platforme) => {
       if (platforme.platform.name) {
         setPlatformes += `${platforme.platform.name}, `;
       }
       return setPlatformes;
     });
   }
+  setPlatformes = setPlatformes.substring(0, setPlatformes.length - 2);
   return (
     <Card
       className="card"
@@ -45,17 +59,26 @@ export default function Cards(props) {
             {/* affiche le nom du jeux transmis */}
           </Typography>
           <Typography variant="body2" color="text.secondary">
+            <Rating
+              name="read-only"
+              value={parseFloat(rating, 10)}
+              readOnly
+              precision={0.1}
+              size="small"
+            />
+            <br />
             Plateformes: {setPlatformes}
             <br />
             Date: {released}
             <br />
-            Genres: {str}
+            Genres: {strGenres}
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
   );
 }
+
 Cards.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -66,4 +89,5 @@ Cards.propTypes = {
   setID: PropTypes.node.isRequired,
   setAff: PropTypes.node.isRequired,
   aff: PropTypes.bool.isRequired,
+  rating: PropTypes.number.isRequired,
 };
