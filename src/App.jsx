@@ -13,6 +13,7 @@ import PcFilter from './components/Filtres/PcFilter';
 import PsFilter from './components/Filtres/PsFilter';
 import XboxFilter from './components/Filtres/XboxFilter';
 import AllFilter from './components/Filtres/AllFilter';
+import SearchAppBar from './components/Header';
 
 let page = 1;
 
@@ -79,6 +80,7 @@ export default function Main() {
   } else {
     return (
       <div>
+        <SearchAppBar setApiFilter={setApiFilter} />
         {/* navbar */}
         <AllFilter setApiFilter={setApiFilter} />
         <XboxFilter setApiFilter={setApiFilter} />
