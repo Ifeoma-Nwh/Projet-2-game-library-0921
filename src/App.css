@@ -5,8 +5,8 @@
   display: grid;
   height: auto;
   width: 90%;
-  margin: 0 auto;
-  margin-top:5rem;
+  margin-top: 5em;
+  margin-left: 0;
   grid-gap: 2.5em;
   grid-template-columns: auto auto auto;
   grid-auto-rows: auto;/*rajoute automatiquement des lignes dans le grid.*/
@@ -20,4 +20,18 @@
 }
 .card:hover{
   transform: scale(1.05);
+}
+.tallCard{
+  width: 750px;
+  height: auto;
+}
+.tallCardFlex{
+  margin-top: 5em;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (max-width:900px){
+  .grid-parent{
+    grid-template-columns: auto;
+  }
 }
