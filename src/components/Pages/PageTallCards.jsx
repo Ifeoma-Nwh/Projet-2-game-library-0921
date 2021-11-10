@@ -133,7 +133,8 @@ export default function PageTallCards(props) {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="500px"
+            height="100%"
+            width="100%"
             image={items.background_image}
             alt={items.name}
           />
@@ -165,7 +166,7 @@ export default function PageTallCards(props) {
               {items.description_raw}
               <br />
               <ImageList
-                sx={{ width: 710, height: 450 }}
+                sx={{ width: '100%', height: 700 }}
                 variant="quilted"
                 cols={2}
                 rowHeight="auto"

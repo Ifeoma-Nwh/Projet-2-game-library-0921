@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-shadow */
 import React, { useEffect } from 'react';
 import axios from 'axios';
