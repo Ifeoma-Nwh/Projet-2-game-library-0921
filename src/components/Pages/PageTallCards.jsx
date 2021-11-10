@@ -7,9 +7,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Rating from '@mui/material/Rating';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import MobileStepper from '@mui/material/MobileStepper';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 
 export default function PageTallCards(props) {
   const { aff, setAff, id } = props;
@@ -24,6 +31,21 @@ export default function PageTallCards(props) {
   const [stores, setStores] = useState([]); // stock les stores du jeux
   const [developers, setDevelopers] = useState([]); // stock les developers du jeux
   const [itemsImages, setItemsImages] = useState([]);
+  // mui defilement de cartes debut
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = itemsImages.length;
+  const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+  // mui defilement de cartes fin
   let affGenres = ''; // stock genres par genres
   // si genres contient des genres
   if (genres) {
@@ -102,15 +124,6 @@ export default function PageTallCards(props) {
       );
   }, [id]);
 
-  function srcset(image, size, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
-
   if (error) {
     // si erreur on affiche laquel
     return <div>Erreur : {error.message}</div>; // si on a une erreur on l'affiche
@@ -122,70 +135,131 @@ export default function PageTallCards(props) {
     );
   }
   return (
-    <div className="tallCardFlex">
-      <Card
-        className="tallCard"
+    <>
+      <button
+        type="button"
         onClick={() => {
           setAff(!aff); // modification de la valeur aff
         }}
       >
-        {/* framework mui */}
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="100%"
-            width="100%"
-            image={items.background_image}
-            alt={items.name}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {items.name}
-              {/* affiche le nom du jeux transmis */}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              <Rating
-                name="read-only"
-                value={parseFloat(items.rating, 10)}
-                readOnly
-                precision={0.1}
-                size="small"
-              />
-              <br />
-              Plateformes:
-              {affPlatforms} <br />
-              Date: {items.released}
-              <br />
-              Genres:
-              {affGenres} <br />
-              {/* lien vers le site du jeux */}
-              Website: <a href={items.website}> {items.website} </a> <br />
-              Stores: {affStores} <br />
-              Developers: {affDevelopers} <br />
-              Description : <br />
-              {items.description_raw}
-              <br />
-              <ImageList
-                sx={{ width: '100%', height: 700 }}
-                variant="quilted"
-                cols={2}
-                rowHeight="auto"
-              >
-                {itemsImages.map((item) => (
-                  <ImageListItem key={item.image} cols="2" rows="2">
-                    <img
-                      {...srcset(item.image, 121, 2, 2)}
-                      alt={item.title}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </div>
+        Back
+      </button>
+      <div className="tallCardFlex">
+        <Card className="tallCard">
+          {/* framework mui */}
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              height="100%"
+              width="100%"
+              image={items.background_image}
+              alt={items.name}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {items.name}
+                {/* affiche le nom du jeux transmis */}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                <Rating
+                  name="read-only"
+                  value={parseFloat(items.rating, 10)}
+                  readOnly
+                  precision={0.1}
+                  size="small"
+                />
+                <br />
+                Plateformes:
+                {affPlatforms} <br />
+                Date: {items.released}
+                <br />
+                Genres:
+                {affGenres} <br />
+                {/* lien vers le site du jeux */}
+                Website: <a href={items.website}> {items.website} </a> <br />
+                Stores: {affStores} <br />
+                Developers: {affDevelopers} <br />
+                Description : <br />
+                {items.description_raw}
+                <br />
+                <Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
+                  <Paper
+                    square
+                    elevation={0}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      height: 50,
+                      pl: 2,
+                      bgcolor: 'background.default',
+                    }}
+                  />
+                  <AutoPlaySwipeableViews
+                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                    index={activeStep}
+                    onChangeIndex={handleStepChange}
+                    enableMouseEvents
+                  >
+                    {/* image déroulante mui */}
+                    {itemsImages.map((step, index) => (
+                      <div key={step.image}>
+                        {Math.abs(activeStep - index) <= 2 ? (
+                          <Box
+                            component="img"
+                            sx={{
+                              height: '100%',
+                              display: 'block',
+                              maxWidth: '400',
+                              overflow: 'hidden',
+                              width: '100%',
+                            }}
+                            src={step.image}
+                            alt="image"
+                          />
+                        ) : null}
+                      </div>
+                    ))}
+                  </AutoPlaySwipeableViews>
+                  <MobileStepper
+                    steps={maxSteps}
+                    position="static"
+                    activeStep={activeStep}
+                    nextButton={
+                      <Button
+                        size="small"
+                        onClick={handleNext}
+                        disabled={activeStep === maxSteps - 1}
+                      >
+                        Next
+                        {theme.direction === 'rtl' ? (
+                          <KeyboardArrowLeft />
+                        ) : (
+                          <KeyboardArrowRight />
+                        )}
+                      </Button>
+                    }
+                    backButton={
+                      <Button
+                        size="small"
+                        onClick={handleBack}
+                        disabled={activeStep === 0}
+                      >
+                        {theme.direction === 'rtl' ? (
+                          <KeyboardArrowRight />
+                        ) : (
+                          <KeyboardArrowLeft />
+                        )}
+                        Back
+                      </Button>
+                    }
+                  />
+                </Box>
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </div>
+    </>
   );
 }
 PageTallCards.propTypes = {
