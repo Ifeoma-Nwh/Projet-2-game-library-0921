@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-shadow */
 import React, { useEffect } from 'react';
 import axios from 'axios';
@@ -19,9 +18,10 @@ import NintendoFilter from './Filtres/NintendoFilter';
 import PcFilter from './Filtres/PcFilter';
 import PsFilter from './Filtres/PsFilter';
 import XboxFilter from './Filtres/XboxFilter';
-import AllFilter from './Filtres/AllFilter';
 import RatingFilter from './Filtres/RatingFilter';
 import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
+import AllFilter from './Filtres/AllFilter';
+import Header from './Header';
 
 let page = 1; // numéro de page
 
@@ -93,6 +93,7 @@ export default function Main() {
   return (
     <Router>
       <div>
+        <Header setApiFilter={setApiFilter} />
         <AllFilter setApiFilter={setApiFilter} setAff={setAff} />
         <XboxFilter setApiFilter={setApiFilter} setAff={setAff} />
         <IosFilter setApiFilter={setApiFilter} setAff={setAff} />
