@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-shadow */
 import React, { useEffect } from 'react';
 import axios from 'axios';
@@ -18,9 +19,11 @@ import NintendoFilter from './Filtres/NintendoFilter';
 import PcFilter from './Filtres/PcFilter';
 import PsFilter from './Filtres/PsFilter';
 import XboxFilter from './Filtres/XboxFilter';
+import RatingFilter from './Filtres/RatingFilter';
+import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
 import AllFilter from './Filtres/AllFilter';
-import NavBar from './NavBar';
 import Genres from './Filtres/Genres/Genres';
+import Header from './Header';
 
 let page = 1; // numéro de page
 
@@ -92,8 +95,8 @@ export default function Main() {
   return (
     <Router>
       <div>
-        <NavBar />
         <Genres setApiFilter={setApiFilter} />
+        <Header setApiFilter={setApiFilter} />
         <AllFilter setApiFilter={setApiFilter} setAff={setAff} />
         <XboxFilter setApiFilter={setApiFilter} setAff={setAff} />
         <IosFilter setApiFilter={setApiFilter} setAff={setAff} />
@@ -103,6 +106,8 @@ export default function Main() {
         <LinuxFilter setApiFilter={setApiFilter} setAff={setAff} />
         <PcFilter setApiFilter={setApiFilter} setAff={setAff} />
         <PsFilter setApiFilter={setApiFilter} setAff={setAff} />
+        <RatingFilter setApiFilter={setApiFilter} setAff={setAff} />
+        <ReleasedDateFilter setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
           la page de tallCards si on la quitte on le redirige vers home "/" */}
         {/* rajout dans la route tall-card de l'id du jeux */}
