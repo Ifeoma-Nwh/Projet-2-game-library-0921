@@ -19,6 +19,8 @@ import PcFilter from './Filtres/PcFilter';
 import PsFilter from './Filtres/PsFilter';
 import XboxFilter from './Filtres/XboxFilter';
 import AllFilter from './Filtres/AllFilter';
+import NavBar from './NavBar';
+import Genres from './Filtres/Genres/Genres';
 
 let page = 1; // numéro de page
 
@@ -90,6 +92,8 @@ export default function Main() {
   return (
     <Router>
       <div>
+        <NavBar />
+        <Genres setApiFilter={setApiFilter} />
         <AllFilter setApiFilter={setApiFilter} setAff={setAff} />
         <XboxFilter setApiFilter={setApiFilter} setAff={setAff} />
         <IosFilter setApiFilter={setApiFilter} setAff={setAff} />
