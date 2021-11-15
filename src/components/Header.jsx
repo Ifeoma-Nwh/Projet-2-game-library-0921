@@ -69,7 +69,7 @@ export default function SearchAppBar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <NavBar />
+          <NavBar setApiFilter={setApiFilter} />
           <Typography
             variant="h6"
             noWrap
