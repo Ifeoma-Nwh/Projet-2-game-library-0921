@@ -1,6 +1,6 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-shadow */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import * as PropTypes from 'prop-types';
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -13,24 +13,21 @@ import PageTallCards from './Pages/PageTallCards';
 import PageCards from './Pages/PageCards';
 import RatingFilter from './Filtres/RatingFilter';
 import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
-import Header from './Header';
 
 let page = 1; // numéro de page
 
-export default function Main() {
-  const [aff, setAff] = React.useState(false); // state d'affichage de la page "tallCard"
-  const [id, setID] = React.useState(34); // state ID
-  const [apiFilter, setApiFilter] = React.useState(
+export default function Main(props) {
+  const { setApiFilter, apiFilter } = props;
+  const [aff, setAff] = useState(false); // state d'affichage de la page "tallCard"
+  const [id, setID] = useState(34); // state ID
+  const [pages, setPage] = useState(1);
+  const [pageChanges, setPageChanges] = useState(true); // true = suivant et false = precedent
+  const [apiPages, setApiPages] = useState(
     `https://rawg.io/api/games?key=a9d50f2881ee441fbaf3e0368a2f3589&page=1`
   );
-  const [pages, setPage] = React.useState(1);
-  const [pageChanges, setPageChanges] = React.useState(true); // true = suivant et false = precedent
-  const [apiPages, setApiPages] = React.useState(
-    `https://rawg.io/api/games?key=a9d50f2881ee441fbaf3e0368a2f3589&page=1`
-  );
-  const [error, setError] = React.useState(null); // state d'erreur de l'api
-  const [isLoaded, setIsLoaded] = React.useState(false); // state chargement API
-  const [items, setItems] = React.useState([]); // state de stockage de l'api
+  const [error, setError] = useState(null); // state d'erreur de l'api
+  const [isLoaded, setIsLoaded] = useState(false); // state chargement API
+  const [items, setItems] = useState([]); // state de stockage de l'api
   useEffect(() => {
     if (pageChanges) {
       // si on selectionne page suivante
@@ -85,7 +82,6 @@ export default function Main() {
   return (
     <Router>
       <div>
-        <Header setApiFilter={setApiFilter} setAff={setAff} />
         <RatingFilter setApiFilter={setApiFilter} setAff={setAff} />
         <ReleasedDateFilter setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
@@ -94,33 +90,45 @@ export default function Main() {
         {aff ? <Redirect to={`/tall-cards/${id}`} /> : <Redirect to="/" />}
         {/* si on a la tallCard affiché (aff=true) on enleve les boutons suivant et precedent */}
         {!aff ? (
-          <a href="/#">
-            {/* remonte en haut de la page */}
-            <button
-              type="button"
-              onClick={() => {
-                setPageChanges(true); // suivant
-                setApiFilter(apiPages.next); // change l'api en allant vers le "next"
-                page += 1; // modification du numéro de page
-                setPage(page); // on stocke le numero de page dans un state
-              }}
-            >
-              {' '}
-              Page suivante{' '}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setPageChanges(false); // precedent
-                setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
-                page -= 1;
-                setPage(page);
-              }}
-            >
-              {' '}
-              Page precedente{' '}
-            </button>
-          </a>
+          <>
+            <RatingFilter
+              apiFilter={apiFilter}
+              setApiFilter={setApiFilter}
+              setAff={setAff}
+            />
+            <ReleasedDateFilter
+              apiFilter={apiFilter}
+              setApiFilter={setApiFilter}
+              setAff={setAff}
+            />
+            <a href="/#">
+              {/* remonte en haut de la page */}
+              <button
+                type="button"
+                onClick={() => {
+                  setPageChanges(true); // suivant
+                  setApiFilter(apiPages.next); // change l'api en allant vers le "next"
+                  page += 1; // modification du numéro de page
+                  setPage(page); // on stocke le numero de page dans un state
+                }}
+              >
+                {' '}
+                Page suivante{' '}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setPageChanges(false); // precedent
+                  setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
+                  page -= 1;
+                  setPage(page);
+                }}
+              >
+                {' '}
+                Page precedente{' '}
+              </button>
+            </a>
+          </>
         ) : null}
         <Switch>
           {/* création de la route /tall-cards relié au composant PageTallCards 
@@ -143,3 +151,7 @@ export default function Main() {
     </Router>
   );
 }
+Main.propTypes = {
+  setApiFilter: PropTypes.node.isRequired,
+  apiFilter: PropTypes.node.isRequired,
+};

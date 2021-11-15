@@ -22,7 +22,7 @@
   transform: scale(1.05);
 }
 .tallCard{
-  width: 750px;
+  width:90%;
   height: auto;
 }
 .tallCardFlex{

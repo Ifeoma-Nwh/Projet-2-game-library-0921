@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
 
 export default function DateFilter(props) {
-  // eslint-disable-next-line react/prop-types
-  const { apiFilter, setApiFilter } = props;
+  const { apiFilter, setApiFilter, setAff } = props;
   const [isAscOrder, setIsAscOrder] = useState(false);
   const ascOrder = '&ordering=released';
   const descOrder = '&ordering=-released';
 
   return (
-    // eslint-disable-next-line react/button-has-type
     <button
+      type="button"
       onClick={() => {
         if (isAscOrder) {
           setApiFilter(apiFilter + ascOrder);
@@ -19,6 +18,7 @@ export default function DateFilter(props) {
         }
 
         setIsAscOrder(!isAscOrder);
+        setAff(false);
       }}
     >
       {isAscOrder ? 'Low to High' : 'High to Low'} Released
@@ -26,7 +26,8 @@ export default function DateFilter(props) {
   );
 }
 
-DateFilter.protoTypes = {
-  apiFilter: PropTypes.string,
-  setApiFilter: PropTypes.string,
+DateFilter.propTypes = {
+  apiFilter: PropTypes.string.isRequired,
+  setApiFilter: PropTypes.node.isRequired,
+  setAff: PropTypes.node.isRequired,
 };
