@@ -11,17 +11,8 @@ import {
 import PageTallCards from './Pages/PageTallCards';
 // eslint-disable-next-line import/no-named-as-default-member
 import PageCards from './Pages/PageCards';
-import AndroidFilter from './Filtres/AndroidFilter';
-import AppleMacintoshFilter from './Filtres/AppleMacintoshFilter';
-import IosFilter from './Filtres/IosFilter';
-import LinuxFilter from './Filtres/LinuxFilter';
-import NintendoFilter from './Filtres/NintendoFilter';
-import PcFilter from './Filtres/PcFilter';
-import PsFilter from './Filtres/PsFilter';
-import XboxFilter from './Filtres/XboxFilter';
 import RatingFilter from './Filtres/RatingFilter';
 import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
-import AllFilter from './Filtres/AllFilter';
 import Header from './Header';
 
 let page = 1; // numéro de page
@@ -94,16 +85,7 @@ export default function Main() {
   return (
     <Router>
       <div>
-        <Header setApiFilter={setApiFilter} />
-        <AllFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <XboxFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <IosFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <AndroidFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <NintendoFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <AppleMacintoshFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <LinuxFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <PcFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <PsFilter setApiFilter={setApiFilter} setAff={setAff} />
+        <Header setApiFilter={setApiFilter} setAff={setAff} />
         <RatingFilter setApiFilter={setApiFilter} setAff={setAff} />
         <ReleasedDateFilter setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
