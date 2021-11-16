@@ -72,7 +72,7 @@ export default function NavBar(props) {
           return (
             <React.Fragment key={anchor}>
               <Button onClick={toggleDrawer(anchor, true)}>
-                <MenuIcon sx={{ color: '#171815' }} />
+                <MenuIcon sx={{ color: '#fff' }} />
               </Button>
               <Drawer
                 anchor={anchor}
