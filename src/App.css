@@ -22,7 +22,7 @@
   transform: scale(1.05);
 }
 .tallCard{
-  width:90%;
+  width:85%;
   height: auto;
 }
 .tallCardFlex{
@@ -30,7 +30,13 @@
   display: flex;
   justify-content: center;
 }
-@media only screen and (max-width:900px){
+@media only screen and (max-width:1000px){
+  .grid-parent{
+    grid-template-columns: auto;
+  }
+}
+
+@media only screen and (max-width:1000px) and (min-width:830px){
   .grid-parent{
     grid-template-columns: auto;
   }
