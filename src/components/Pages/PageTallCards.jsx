@@ -154,6 +154,7 @@ export default function PageTallCards(props) {
               width="100%"
               image={items.background_image}
               alt={items.name}
+              sx={{ height: '28.125em' }}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
@@ -208,6 +209,7 @@ export default function PageTallCards(props) {
                             component="img"
                             sx={{
                               height: '100%',
+                              maxHeight: '40em',
                               display: 'block',
                               maxWidth: '400',
                               overflow: 'hidden',
