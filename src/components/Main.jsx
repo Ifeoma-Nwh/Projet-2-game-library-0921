@@ -13,6 +13,7 @@ import PageTallCards from './Pages/PageTallCards';
 import PageCards from './Pages/PageCards';
 import RatingFilter from './Filtres/RatingFilter';
 import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
+import Header from './Header';
 
 let page = 1; // numéro de page
 
@@ -82,8 +83,7 @@ export default function Main(props) {
   return (
     <Router>
       <div>
-        <RatingFilter setApiFilter={setApiFilter} setAff={setAff} />
-        <ReleasedDateFilter setApiFilter={setApiFilter} setAff={setAff} />
+        <Header setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
           la page de tallCards si on la quitte on le redirige vers home "/" */}
         {/* rajout dans la route tall-card de l'id du jeux */}
