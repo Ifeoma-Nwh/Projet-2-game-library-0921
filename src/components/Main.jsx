@@ -30,7 +30,6 @@ export default function Main(props) {
   const [isLoaded, setIsLoaded] = useState(false); // state chargement API
   const [items, setItems] = useState([]); // state de stockage de l'api
   useEffect(() => {
-    console.log(apiFilter);
     if (pageChanges) {
       // si on selectionne page suivante
       axios
