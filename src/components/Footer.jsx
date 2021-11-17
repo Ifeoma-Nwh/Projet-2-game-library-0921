@@ -1,18 +1,76 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import './Footer.css';
+import { Grid, List, ListItem, ListItemText, IconButton } from '@mui/material';
+
+function TeamList() {
+  return (
+    <List
+      sx={{
+        width: '100%',
+      }}
+    >
+      <ListItem>
+        <ListItemText primary="Bryan Kaneb" sx={{ ml: 10 }} />
+        <IconButton>
+          <a
+            className="link"
+            href="https://www.linkedin.com/in/bryan-kaneb/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        </IconButton>
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Laura DuBoeuf" sx={{ ml: 10 }} />
+        <IconButton>
+          <a
+            className="link"
+            href="https://www.linkedin.com/in/laura-duboeuf-lornage-8b28a7220/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        </IconButton>
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Oualid Kheloufi" sx={{ ml: 10 }} />
+        <IconButton>
+          <a
+            className="link"
+            href="https://www.linkedin.com/in/oualid-kheloufi-351286ba/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        </IconButton>
+      </ListItem>
+      <ListItem>
+        <ListItemText primary="Ifeoma Nwaoha" sx={{ ml: 10 }} />
+        <IconButton>
+          <a
+            className="link"
+            href="https://www.linkedin.com/in/ifeoma-nwaoha/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <LinkedInIcon />
+          </a>
+        </IconButton>
+      </ListItem>
+    </List>
+  );
+}
 
 export default function Footer() {
   return (
-    <div>
-      <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
-        spacing={4}
-      >
+    <Grid container spacing={1} mt={2}>
+      <Grid item xs={4}>
         <Box className="box-width">
           <h3>About Us</h3>
           <p>
@@ -21,40 +79,28 @@ export default function Footer() {
             exercitationem dignissimos.
           </p>
         </Box>
+      </Grid>
+      <Grid item xs={4}>
         <Box className="box-width">
           <h3>Team</h3>
-          <Stack direction="row" spacing={2}>
-            <div>
-              <ul className="list-lineHeight">
-                <li>Bryan Kaneb</li>
-                <li>Bryan Kaneb</li>
-                <li>Bryan Kaneb</li>
-                <li>Bryan Kaneb</li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li>
-                  <LinkedInIcon />
-                </li>
-                <li>
-                  <LinkedInIcon />
-                </li>
-                <li>
-                  <LinkedInIcon />
-                </li>
-                <li>
-                  <LinkedInIcon />
-                </li>
-              </ul>
-            </div>
-          </Stack>
+          <TeamList />
         </Box>
+      </Grid>
+      <Grid item xs={4}>
         <Box className="box-width">
-          <h3>Support</h3>
-          <p>RAWG API - https://rawg.io/apidocs</p>
+          <h3>Ressources</h3>
+          <p>
+            <a
+              className="link"
+              href="https://rawg.io/apidocs"
+              target="_blank"
+              rel="noreferrer"
+            >
+              RAWG API
+            </a>
+          </p>
         </Box>
-      </Stack>
-    </div>
+      </Grid>
+    </Grid>
   );
 }

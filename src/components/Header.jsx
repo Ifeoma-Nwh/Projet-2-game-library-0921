@@ -53,13 +53,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar(props) {
-  const { setApiFilter, setAff } = props;
+  const { setApiFilter } = props;
   const [searchValue, setSearchValue] = useState('');
-  const [searchValueInput, setSearchValueInput] = useState('');
 
   const handleOnchange = (e) => {
-    setSearchValueInput(e.target.value);
-    setSearchValue(e.target.value.replace(/ /g, '-'));
+    setSearchValue(e.target.value);
   };
 
   useEffect(() => {
@@ -71,7 +69,7 @@ export default function SearchAppBar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ backgroundColor: 'black' }}>
-          <NavBar setApiFilter={setApiFilter} setAff={setAff} />
+          <NavBar setApiFilter={setApiFilter} />
           <Typography
             variant="h6"
             noWrap
@@ -87,7 +85,7 @@ export default function SearchAppBar(props) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchValueInput}
+              value={searchValue}
               onChange={handleOnchange}
             />
           </Search>
@@ -98,5 +96,4 @@ export default function SearchAppBar(props) {
 }
 SearchAppBar.propTypes = {
   setApiFilter: PropTypes.node.isRequired,
-  setAff: PropTypes.node.isRequired,
 };

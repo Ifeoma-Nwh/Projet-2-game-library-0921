@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
+import '../App.css';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ import NintendoFilter from './Filtres/NintendoFilter';
 import AppleMacintoshFilter from './Filtres/AppleMacintoshFilter';
 
 export default function NavBar(props) {
-  const { setApiFilter, setAff } = props;
+  const { setApiFilter } = props;
   const [state, setState] = React.useState({
     left: false,
   });
@@ -38,35 +38,52 @@ export default function NavBar(props) {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
+        textAlign: 'justify',
+        margin: '1.5em',
+        fontSize: '1.25em',
+      }}
       role="presentation"
-      onClick={
-        (toggleDrawer(anchor, false),
-        () => {
-          setAff(false);
-        })
-      }
+      onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       PLATEFORMES
       <List>
         {[
-          <Link to="/all-filter">All</Link>,
-          <Link to="/pc-filter">Pc</Link>,
-          <Link to="/playstation-filter">PlayStation</Link>,
-          <Link to="/xbox-filter">X Box</Link>,
-          <Link to="/ios-filter">Ios</Link>,
-          <Link to="/applemacintosh">Apple Macintosh</Link>,
-          <Link to="/linux-filter">Linux</Link>,
-          <Link to="/nintendo-filter">Nintendo</Link>,
-          <Link to="/android-filter">Android</Link>,
+          <Link to="/all-filter" className="navbar-link">
+            All
+          </Link>,
+          <Link to="/pc-filter" className="navbar-link">
+            Pc
+          </Link>,
+          <Link to="/playstation-filter" className="navbar-link">
+            PlayStation
+          </Link>,
+          <Link to="/xbox-filter" className="navbar-link">
+            X Box
+          </Link>,
+          <Link to="/ios-filter" className="navbar-link">
+            Ios
+          </Link>,
+          <Link to="/applemacintosh" className="navbar-link">
+            Apple Macintosh
+          </Link>,
+          <Link to="/linux-filter" className="navbar-link">
+            Linux
+          </Link>,
+          <Link to="/nintendo-filter" className="navbar-link">
+            Nintendo
+          </Link>,
+          <Link to="/android-filter" className="navbar-link">
+            Android
+          </Link>,
         ].map((text) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
+          <ListItemButton key={text}>
+            <ListItemText primary={text} color="#fff" />
+          </ListItemButton>
         ))}
       </List>
-      <Divider />
     </Box>
   );
 
@@ -75,7 +92,7 @@ export default function NavBar(props) {
       <div>
         {['menu'].map((anchor) => {
           return (
-            <React.Fragment key={anchor}>
+            <React.Fragment key={anchor} background="red">
               <Button onClick={toggleDrawer(anchor, true)}>
                 <MenuIcon sx={{ color: '#fff' }} />
               </Button>
@@ -124,5 +141,4 @@ export default function NavBar(props) {
 }
 NavBar.propTypes = {
   setApiFilter: PropTypes.node.isRequired,
-  setAff: PropTypes.node.isRequired,
 };

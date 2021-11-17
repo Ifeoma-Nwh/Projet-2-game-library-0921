@@ -17,6 +17,8 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import LoadingApp from '../LoadingApp';
 
 export default function PageTallCards(props) {
   const { aff, setAff, id } = props;
@@ -130,20 +132,17 @@ export default function PageTallCards(props) {
   }
   if (!isLoaded) {
     // si ca charge on affiche "chargement..."
-    return (
-      <div style={{ textAlign: 'center' }}>Chargement de Games Library…</div>
-    );
+    return <LoadingApp />;
   }
   return (
     <>
-      <button
-        type="button"
+      <Button
         onClick={() => {
           setAff(!aff); // modification de la valeur aff
         }}
       >
-        Back
-      </button>
+        <ArrowBackOutlinedIcon fontSize="large" />
+      </Button>
       <div className="tallCardFlex">
         <Card className="tallCard">
           {/* framework mui */}
@@ -154,20 +153,19 @@ export default function PageTallCards(props) {
               width="100%"
               image={items.background_image}
               alt={items.name}
-              sx={{ height: '28.125em' }}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {items.name}
                 {/* affiche le nom du jeux transmis */}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body1" color="text.primary">
                 <Rating
                   name="read-only"
                   value={parseFloat(items.rating, 10)}
                   readOnly
                   precision={0.1}
-                  size="small"
+                  size="large"
                 />
                 <br />
                 Plateformes:
@@ -209,7 +207,6 @@ export default function PageTallCards(props) {
                             component="img"
                             sx={{
                               height: '100%',
-                              maxHeight: '40em',
                               display: 'block',
                               maxWidth: '400',
                               overflow: 'hidden',

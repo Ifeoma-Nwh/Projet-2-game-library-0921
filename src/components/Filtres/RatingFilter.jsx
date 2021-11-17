@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
+import { Button } from '@mui/material';
+import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
 
 export default function NoteFilter(props) {
   const { apiFilter, setApiFilter, setAff } = props;
@@ -8,8 +11,8 @@ export default function NoteFilter(props) {
   const descOrder = '&ordering=-rating';
 
   return (
-    <button
-      type="button"
+    <Button
+      size="medium"
       onClick={() => {
         if (isAscOrder) {
           setApiFilter(apiFilter + ascOrder);
@@ -21,8 +24,13 @@ export default function NoteFilter(props) {
         setAff(false);
       }}
     >
-      {isAscOrder ? 'Low to High' : 'High to Low'} Rating
-    </button>
+      Rating
+      {isAscOrder ? (
+        <ArrowUpwardOutlinedIcon fontSize="small" />
+      ) : (
+        <ArrowDownwardOutlinedIcon fontSize="small" />
+      )}
+    </Button>
   );
 }
 

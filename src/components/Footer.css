@@ -2,10 +2,29 @@
     width: 100%;
 }
 
+.box-width h3 {
+    text-align: center;
+}
+
+.box-width p {
+    text-align: center;
+    line-height: 1.75;
+    
+}
+
 li {
     list-style: none;
 }
 
 .list-lineHeight{
-    line-height: 1.65;
+    line-height: 1.75;
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+.link:active {
+    color: blue;
 }

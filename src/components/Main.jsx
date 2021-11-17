@@ -8,12 +8,15 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { Grid, Button } from '@mui/material';
 import PageTallCards from './Pages/PageTallCards';
 // eslint-disable-next-line import/no-named-as-default-member
 import PageCards from './Pages/PageCards';
 import RatingFilter from './Filtres/RatingFilter';
 import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
-import Header from './Header';
+import LoadingApp from './LoadingApp';
+import Footer from './Footer';
+import Genres from './Filtres/Genres';
 
 let page = 1; // numéro de page
 
@@ -75,60 +78,41 @@ export default function Main(props) {
     return <div>Erreur : {error.message}</div>; // si on a une erreur on l'affiche
   }
   if (!isLoaded) {
-    // si ca charge on affiche "chargement..."
-    return (
-      <div style={{ textAlign: 'center' }}>Chargement de Games Library…</div>
-    );
+    // si ca charge on affiche le composant LoadingApp
+    return <LoadingApp />;
   }
   return (
     <Router>
       <div>
-        <Header setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
           la page de tallCards si on la quitte on le redirige vers home "/" */}
         {/* rajout dans la route tall-card de l'id du jeux */}
         {aff ? <Redirect to={`/tall-cards/${id}`} /> : <Redirect to="/" />}
         {/* si on a la tallCard affiché (aff=true) on enleve les boutons suivant et precedent */}
         {!aff ? (
-          <>
-            <RatingFilter
-              apiFilter={apiFilter}
-              setApiFilter={setApiFilter}
-              setAff={setAff}
-            />
-            <ReleasedDateFilter
-              apiFilter={apiFilter}
-              setApiFilter={setApiFilter}
-              setAff={setAff}
-            />
-            <a href="/#">
-              {/* remonte en haut de la page */}
-              <button
-                type="button"
-                onClick={() => {
-                  setPageChanges(true); // suivant
-                  setApiFilter(apiPages.next); // change l'api en allant vers le "next"
-                  page += 1; // modification du numéro de page
-                  setPage(page); // on stocke le numero de page dans un state
-                }}
-              >
-                {' '}
-                Page suivante{' '}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setPageChanges(false); // precedent
-                  setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
-                  page -= 1;
-                  setPage(page);
-                }}
-              >
-                {' '}
-                Page precedente{' '}
-              </button>
-            </a>
-          </>
+          <Grid
+            container
+            spacing={1}
+            sx={{ width: '95%', margin: 'auto', mt: 6 }}
+          >
+            <Grid item xs={4}>
+              <RatingFilter
+                apiFilter={apiFilter}
+                setApiFilter={setApiFilter}
+                setAff={setAff}
+              />
+            </Grid>
+            <Grid item xs={4} sx={{ textAlign: 'center' }}>
+              <Genres setApiFilter={setApiFilter} apiFilter={apiFilter} />
+            </Grid>
+            <Grid item xs={4} sx={{ textAlign: 'right' }}>
+              <ReleasedDateFilter
+                apiFilter={apiFilter}
+                setApiFilter={setApiFilter}
+                setAff={setAff}
+              />
+            </Grid>
+          </Grid>
         ) : null}
         <Switch>
           {/* création de la route /tall-cards relié au composant PageTallCards 
@@ -147,10 +131,45 @@ export default function Main(props) {
             />
           </Route>
         </Switch>
+        <Grid
+          container
+          spacing={1}
+          sx={{ width: '95%', margin: 'auto', mt: 6 }}
+        >
+          <Grid item xs={6}>
+            <Button
+              href="/#"
+              onClick={() => {
+                setPageChanges(false); // precedent
+                setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
+                page -= 1;
+                setPage(page);
+              }}
+            >
+              Page precedente
+            </Button>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'right' }}>
+            {/* remonte en haut de la page */}
+            <Button
+              href="/#"
+              onClick={() => {
+                setPageChanges(true); // suivant
+                setApiFilter(apiPages.next); // change l'api en allant vers le "next"
+                page += 1; // modification du numéro de page
+                setPage(page); // on stocke le numero de page dans un state
+              }}
+            >
+              Page suivante
+            </Button>
+          </Grid>
+        </Grid>
       </div>
+      <Footer />
     </Router>
   );
 }
+
 Main.propTypes = {
   setApiFilter: PropTypes.node.isRequired,
   apiFilter: PropTypes.node.isRequired,
