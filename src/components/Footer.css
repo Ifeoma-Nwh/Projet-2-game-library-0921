@@ -1,11 +1,44 @@
+:root {
+  --police-primary-color: #fff;
+  --hover-click-color: #1976D2;
+}
+
 .box-width {
-    width: 100%;
+  width: 90%;
+  color: var(--police-primary-color);
+  margin: 0 auto;
+}
+
+.box-width h3 {
+  text-align: center;
+}
+
+.box-width p {
+  text-align: center;
+  line-height: 1.75;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
-.list-lineHeight{
-    line-height: 1.65;
+.list-lineHeight {
+  line-height: 1.75;
+}
+
+.link {
+  color: var(--police-primary-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--hover-click-color);
+}
+
+.icon-color {
+  color: #fff;
+}
+
+.icon-color:hover {
+  color: var(--hover-click-color);
 }

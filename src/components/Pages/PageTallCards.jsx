@@ -17,6 +17,8 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import LoadingApp from '../LoadingApp';
 
 export default function PageTallCards(props) {
   const { aff, setAff, id } = props;
@@ -130,44 +132,46 @@ export default function PageTallCards(props) {
   }
   if (!isLoaded) {
     // si ca charge on affiche "chargement..."
-    return (
-      <div style={{ textAlign: 'center' }}>Chargement de Games Library…</div>
-    );
+    return <LoadingApp />;
   }
   return (
     <>
-      <button
-        type="button"
+      <Button
         onClick={() => {
           setAff(!aff); // modification de la valeur aff
         }}
       >
-        Back
-      </button>
+        <ArrowBackOutlinedIcon fontSize="large" />
+      </Button>
       <div className="tallCardFlex">
-        <Card className="tallCard">
+        <Card className="tallCard neon-effect-tallCard">
           {/* framework mui */}
           <CardActionArea>
             <CardMedia
               component="img"
-              height="100%"
+              height="55em"
               width="100%"
               image={items.background_image}
               alt={items.name}
-              sx={{ height: '28.125em' }}
+              sx={{ height: '55em' }}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+            <CardContent className="tallCard-bg">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ color: '#fff' }}
+              >
                 {items.name}
                 {/* affiche le nom du jeux transmis */}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body1" color="#fff">
                 <Rating
                   name="read-only"
                   value={parseFloat(items.rating, 10)}
                   readOnly
                   precision={0.1}
-                  size="small"
+                  size="large"
                 />
                 <br />
                 Plateformes:
@@ -192,7 +196,7 @@ export default function PageTallCards(props) {
                       alignItems: 'center',
                       height: 50,
                       pl: 2,
-                      bgcolor: 'background.default',
+                      bgcolor: '#000',
                     }}
                   />
                   <AutoPlaySwipeableViews
@@ -209,7 +213,7 @@ export default function PageTallCards(props) {
                             component="img"
                             sx={{
                               height: '100%',
-                              maxHeight: '40em',
+                              maxHeight: '50em',
                               display: 'block',
                               maxWidth: '400',
                               overflow: 'hidden',

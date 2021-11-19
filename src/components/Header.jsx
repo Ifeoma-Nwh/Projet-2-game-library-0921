@@ -9,6 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 import NavBar from './NavBar';
+import '../App.css';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,19 +69,36 @@ export default function SearchAppBar(props) {
     );
   }, [searchValue]);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
-        <Toolbar sx={{ backgroundColor: 'black' }}>
-          <NavBar setApiFilter={setApiFilter} setAff={setAff} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        <Toolbar
+          sx={{
+            backgroundColor: 'black',
+            height: '15vh',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+            }}
           >
-            GL
-          </Typography>
-          <Search>
+            <NavBar setApiFilter={setApiFilter} setAff={setAff} />
+            <Typography
+              className="neon-effect"
+              sx={{
+                textAlign: 'center',
+                letterSpacing: '20px',
+                fontSize: '4vw',
+                width: '75vw',
+              }}
+            >
+              GAME LIBRARY
+            </Typography>
+          </Box>
+          <Search xs={12}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

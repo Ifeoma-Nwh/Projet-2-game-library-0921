@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState } from 'react';
-import Footer from './components/Footer';
 import Main from './components/Main';
 
 function App() {
@@ -8,10 +7,9 @@ function App() {
     `https://rawg.io/api/games?key=a9d50f2881ee441fbaf3e0368a2f3589&page=1`
   );
   return (
-    <>
+    <div className="App">
       <Main setApiFilter={setApiFilter} apiFilter={apiFilter} />
-      <Footer />
-    </>
+    </div>
   );
 }
 export default App;

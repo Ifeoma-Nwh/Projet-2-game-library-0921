@@ -5,8 +5,9 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import Rating from '@mui/material/Rating';
+import './Cards.css';
+import { CardActionArea } from '@mui/material';
 
 export default function Cards(props) {
   const {
@@ -44,21 +45,23 @@ export default function Cards(props) {
   setPlatformes = setPlatformes.substring(0, setPlatformes.length - 2);
   return (
     <Card
-      className="card"
+      variant="outlined"
+      className="card glass-effect"
       onClick={() => {
         setAff(!aff);
         setID(id);
       }}
+      sx={{ background: '#000' }}
     >
       {/* framework mui */}
       <CardActionArea>
         <CardMedia component="img" height="200" image={image} alt={name} />
-        <CardContent>
+        <CardContent className="card-color">
           <Typography gutterBottom variant="h5" component="div">
             {name}
             {/* affiche le nom du jeux transmis */}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" sx={{ height: '9.5em' }}>
             <Rating
               name="read-only"
               value={parseFloat(rating, 10)}
