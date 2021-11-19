@@ -144,22 +144,28 @@ export default function PageTallCards(props) {
         <ArrowBackOutlinedIcon fontSize="large" />
       </Button>
       <div className="tallCardFlex">
-        <Card className="tallCard">
+        <Card className="tallCard neon-effect-tallCard">
           {/* framework mui */}
           <CardActionArea>
             <CardMedia
               component="img"
-              height="100%"
+              height="55em"
               width="100%"
               image={items.background_image}
               alt={items.name}
+              sx={{ height: '55em' }}
             />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+            <CardContent className="tallCard-bg">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="div"
+                sx={{ color: '#fff' }}
+              >
                 {items.name}
                 {/* affiche le nom du jeux transmis */}
               </Typography>
-              <Typography variant="body1" color="text.primary">
+              <Typography variant="body1" color="#fff">
                 <Rating
                   name="read-only"
                   value={parseFloat(items.rating, 10)}
@@ -190,7 +196,7 @@ export default function PageTallCards(props) {
                       alignItems: 'center',
                       height: 50,
                       pl: 2,
-                      bgcolor: 'background.default',
+                      bgcolor: '#000',
                     }}
                   />
                   <AutoPlaySwipeableViews
@@ -207,6 +213,7 @@ export default function PageTallCards(props) {
                             component="img"
                             sx={{
                               height: '100%',
+                              maxHeight: '50em',
                               display: 'block',
                               maxWidth: '400',
                               overflow: 'hidden',

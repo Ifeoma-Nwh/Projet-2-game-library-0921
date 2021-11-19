@@ -17,6 +17,8 @@ import ReleasedDateFilter from './Filtres/ReleasedDateFilter';
 import LoadingApp from './LoadingApp';
 import Footer from './Footer';
 import Genres from './Filtres/Genres';
+import '../App.css';
+import Header from './Header';
 
 let page = 1; // numéro de page
 
@@ -83,7 +85,8 @@ export default function Main(props) {
   }
   return (
     <Router>
-      <div>
+      <div className="App">
+        <Header setApiFilter={setApiFilter} setAff={setAff} />
         {/* si la tallCard est affiché (aff=true) on redirige l'utilisateur vers 
           la page de tallCards si on la quitte on le redirige vers home "/" */}
         {/* rajout dans la route tall-card de l'id du jeux */}
@@ -131,39 +134,41 @@ export default function Main(props) {
             />
           </Route>
         </Switch>
-        <Grid
-          container
-          spacing={1}
-          sx={{ width: '95%', margin: 'auto', mt: 6 }}
-        >
-          <Grid item xs={6}>
-            <Button
-              href="/#"
-              onClick={() => {
-                setPageChanges(false); // precedent
-                setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
-                page -= 1;
-                setPage(page);
-              }}
-            >
-              Page precedente
-            </Button>
+        {!aff ? (
+          <Grid
+            container
+            spacing={1}
+            sx={{ width: '95%', margin: 'auto', mt: 6 }}
+          >
+            <Grid item xs={6}>
+              <Button
+                href="/#"
+                onClick={() => {
+                  setPageChanges(false); // precedent
+                  setApiFilter(apiPages.previous); // change l'api en allant vers le "previous"
+                  page -= 1;
+                  setPage(page);
+                }}
+              >
+                Previous
+              </Button>
+            </Grid>
+            <Grid item xs={6} sx={{ textAlign: 'right' }}>
+              {/* remonte en haut de la page */}
+              <Button
+                href="/#"
+                onClick={() => {
+                  setPageChanges(true); // suivant
+                  setApiFilter(apiPages.next); // change l'api en allant vers le "next"
+                  page += 1; // modification du numéro de page
+                  setPage(page); // on stocke le numero de page dans un state
+                }}
+              >
+                Next
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6} sx={{ textAlign: 'right' }}>
-            {/* remonte en haut de la page */}
-            <Button
-              href="/#"
-              onClick={() => {
-                setPageChanges(true); // suivant
-                setApiFilter(apiPages.next); // change l'api en allant vers le "next"
-                page += 1; // modification du numéro de page
-                setPage(page); // on stocke le numero de page dans un state
-              }}
-            >
-              Page suivante
-            </Button>
-          </Grid>
-        </Grid>
+        ) : null}
       </div>
       <Footer />
     </Router>

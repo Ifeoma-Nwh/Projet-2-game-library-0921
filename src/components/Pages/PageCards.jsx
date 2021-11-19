@@ -7,7 +7,7 @@ export default function PageCards(props) {
   const { setAff, setID, items } = props;
   return (
     <Box flexGrow={1}>
-      <Grid container spacing={6} sx={{ width: '95%', margin: 'auto' }}>
+      <Grid container spacing={1} sx={{ width: '95%', margin: 'auto' }}>
         {/* cards */}
         {/* on va lire le tableau de la réponse parametre par parametre */}
         {items.map((itemCard) => (

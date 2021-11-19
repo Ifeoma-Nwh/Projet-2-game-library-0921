@@ -20,7 +20,7 @@ import NintendoFilter from './Filtres/NintendoFilter';
 import AppleMacintoshFilter from './Filtres/AppleMacintoshFilter';
 
 export default function NavBar(props) {
-  const { setApiFilter } = props;
+  const { setApiFilter, setAff } = props;
   const [state, setState] = React.useState({
     left: false,
   });
@@ -45,7 +45,12 @@ export default function NavBar(props) {
         fontSize: '1.25em',
       }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      onClick={
+        (toggleDrawer(anchor, false),
+        () => {
+          setAff(false);
+        })
+      }
       onKeyDown={toggleDrawer(anchor, false)}
     >
       PLATEFORMES
@@ -141,4 +146,5 @@ export default function NavBar(props) {
 }
 NavBar.propTypes = {
   setApiFilter: PropTypes.node.isRequired,
+  setAff: PropTypes.node.isRequired,
 };

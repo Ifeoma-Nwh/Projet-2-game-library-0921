@@ -51,7 +51,7 @@ export default function Cards(props) {
         setAff(!aff);
         setID(id);
       }}
-      sx={{ background: '#222' }}
+      sx={{ background: '#000' }}
     >
       {/* framework mui */}
       <CardActionArea>
@@ -61,11 +61,7 @@ export default function Cards(props) {
             {name}
             {/* affiche le nom du jeux transmis */}
           </Typography>
-          <Typography
-            variant="body2"
-            className="card-color"
-            sx={{ height: '9.5em' }}
-          >
+          <Typography variant="body2" sx={{ height: '9.5em' }}>
             <Rating
               name="read-only"
               value={parseFloat(rating, 10)}

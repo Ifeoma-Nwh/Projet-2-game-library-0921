@@ -22,10 +22,18 @@ export default function LoadingApp() {
   }, []);
 
   return (
-    <Box sx={{ width: '95%', position: 'absolute', top: '50%', left: '2.5%' }}>
+    <Box
+      style={{
+        width: '95%',
+        position: 'absolute',
+        top: '50%',
+        left: '2.5%',
+      }}
+    >
       <LinearProgress
         variant="determinate"
         value={progress}
+        color="inherit"
         sx={{ height: '20px' }}
       />
     </Box>

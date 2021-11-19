@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
 import Main from './components/Main';
-import Header from './components/Header';
 
 function App() {
   const [apiFilter, setApiFilter] = useState(
@@ -9,7 +8,6 @@ function App() {
   );
   return (
     <div className="App">
-      <Header setApiFilter={setApiFilter} />
       <Main setApiFilter={setApiFilter} apiFilter={apiFilter} />
     </div>
   );

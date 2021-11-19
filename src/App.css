@@ -1,26 +1,79 @@
+:root {
+  --main-bg-color: #000;
+  --header-bg-color: #000;
+}
+
 .App {
-  background: #202124;  /* fallback for old browsers */
+  background: #000;
 }
 
 .card {
   max-width: 21.875rem;
   height: 25rem;
 }
-.card:hover {
-  transform: scale(1.05);
-}
+
 .tallCard {
-  width: 90%;
+  width: 85%;
   height: auto;
 }
+
 .tallCardFlex {
   margin-top: 5em;
   display: flex;
   justify-content: center;
 }
 
+.tallCard-bg {
+  background: #000;
+}
+
 .navbar-link {
   text-decoration: none;
-  color: #202124;
+  color: #000;
   font-size: large;
+  width: 100%;
+}
+
+.neon-effect {
+  color: #111;
+  outline: none;
+  animation: neon-title 5s linear infinite;
+}
+
+.neon-effect-tallCard {
+  animation: animate 1s linear infinite;
+}
+
+@keyframes neon-title {
+
+  0%, 18%, 20%, 50.1%, 60%, 65.1%, 80%, 90.1%, 92%
+  {
+    color: #111;
+    text-shadow: none;
+  }
+
+  18.1%, 20.1%, 30%, 50%, 60.1%, 65%, 80.1%, 90%, 92.1%, 100%  
+  {
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4, 
+    0 0 20px #03bcf4, 
+    0 0 40px #03bcf4, 
+    0 0 80px #03bcf4, 
+    0 0 160px #03bcf4;
+  }
+}
+
+@keyframes animate {
+
+  0%, 100%
+  {
+    border-color: #111;
+    /* box-shadow: none; */
+    box-shadow: 0px 0px 5px #03bcf4, 
+    0px 0px 10px #03bcf4, 
+    0px 0px 20px #03bcf4, 
+    0px 0px 40px #03bcf4, 
+    0px 0px 80px #03bcf4;
+  }
+
 }
