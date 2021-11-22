@@ -68,6 +68,7 @@ export default function SearchAppBar(props) {
       `https://api.rawg.io/api/games?key=d3437269835545eaa073f2e0d0032525&search=${searchValue}`
     );
   }, [searchValue]);
+  console.log('test');
   return (
     <Box>
       <AppBar position="static">
