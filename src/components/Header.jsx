@@ -4,7 +4,8 @@ import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Typography, InputBase } from '@mui/material/';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
 // eslint-disable-next-line import/no-unresolved
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
@@ -68,7 +69,6 @@ export default function SearchAppBar(props) {
       `https://api.rawg.io/api/games?key=d3437269835545eaa073f2e0d0032525&search=${searchValue}`
     );
   }, [searchValue]);
-  console.log('test');
   return (
     <Box>
       <AppBar position="static">
