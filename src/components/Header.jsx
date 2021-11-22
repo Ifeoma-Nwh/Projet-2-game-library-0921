@@ -5,6 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { Typography, InputBase } from '@mui/material/';
+// eslint-disable-next-line import/no-unresolved
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 import NavBar from './NavBar';
